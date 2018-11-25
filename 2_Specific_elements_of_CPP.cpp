@@ -10,6 +10,8 @@ int fun2(int valA, char ch = 'A', float valB = 7.9);
 int fun3(int valA);
 int fun3(int valA, int valB);
 int fun3(float valA);
+//funkcja otwarta
+inline int fun4(int a, int b);
 
 int main()
 {
@@ -100,8 +102,32 @@ int main()
     /*
     6. Dynamiczne zarządzanie pamięcią
 
-
+    Odbywa się przy użyciu operatorów new i delete
+    new typZmiennej [n];
+    przyciela w pamięci miejsce opzwalające na zapis
+    n elementów typu TypZmiennej i zwraca wskaźnik do pierwszej z nich
+    delete adres;
+    zwalnia pamięć przedzieloną przy użyciu danego adresu
     */
+
+    int * tabela = new int [4];
+    delete tabela;
+
+    /*
+    7. Funkcje otwarte
+
+    Są deklarowane przy użyciu słowa kluczowego: inline [zob. fun4()]
+    Różnica pomiędzy funkcją otwartą, a zwykłą polega na miejscu zapisu
+    instrukcji wykonywanech przez funkcję. Standardowo, funkcja jest zapisana
+    osobno (tutaj: poza main()) a wywołanie jej jest tak na prawdę wskaźnikiem
+    do miejsa w którym zapisamy jest kod funkcji. Funkcja otwatra (inline) podczas
+    kompilacji jest cała przepisywana (często wielokrotnie) do miejsc jej wywołania
+    zwiększa to rozmiary plików, ale nieco zwiększa wydajność (program, podczas
+    wykonywania się, nie musi przeskawiwać do miejsca zapisu funkcji, gdyż jest ona
+    po prostu poniżej)
+    */
+
+    fun4(1,2);
 
     return 0;
 }
@@ -127,4 +153,7 @@ int fun3(int valA, int valB){
 int fun3(float valA){
     cout<<"\n3 przeciazenie: "<<valA/3.2<<endl;
     return 0;
+}
+inline int fun4(int a, int b){
+    return (a+b);
 }
