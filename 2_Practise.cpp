@@ -14,6 +14,9 @@ void zad2Z2references(int & a, int & b);
 void zad2Z3pointers(Test2Z3 * aaa); // wymaga struct test2z3{};
 void zad2Z3references(Test2Z3 & aaa); // wymaga struct test2z3{};
 
+void zad2Z7(void);
+
+inline int zad2Z8(char c, int n);
 
 int main(){
 
@@ -74,7 +77,19 @@ int main(){
     delete adi;
     delete add;
 
+    /*
+    Napisać program przydzielający miejsce na jednakowe tablice liczb
+    całkowitych o podanym rozmiarze. Pamięć pędzie przydzielana tak długo
+    jak to możliwe.
+    */
+    zad2Z7();
 
+    cout<<"---\nZadanie 2.8 funkcje inline\n";
+    // funkcje inline różnią się od standardowych miejscem ich zapisu podczas kompilacji
+    // ich skompilowana wersja znajduje się w miejscu ich wywołania!
+    cout<<"(\'E\', 3) = "<<zad2Z8('E', 3)<<endl;
+    cout<<"(\'e\', 9) = "<<zad2Z8('e', 3)<<endl;
+    cout<<"(\'!\', 2) = "<<zad2Z8('!', 2)<<endl;
     return 0;
 }
 
@@ -118,4 +133,28 @@ void zad2Z3references(Test2Z3 & aaa){
     // zerowanie danego Test2Z3
     aaa.n = 0;
     aaa.x = 0;
+}
+void zad2Z7(void){
+    cout<<"---\nZadanie 2.7 new";
+    int rozmiar = 0;
+    int i = 1;
+    int * t;
+    cout<<"\npodaj rozmiar tablicy: ";
+    cin>>rozmiar;
+    while (i<10){ // while (true) powoduje bład przepełnienia pamięci
+    // nie wiem czy możliwym jest wykonanie tego kodu
+        t = new int[rozmiar];
+        if (t)
+            cout<<"\nPrzydzial tablicy nr: "<<i++<<endl;
+        else
+            break;
+    }
+    cout<<"\nBrak pamieci";
+}
+inline int zad2Z8(char c, int n){
+    int wynik;
+    if (c=='e')         wynik = n+c;
+    else if (c=='E')    wynik = n-c;
+    else                wynik = n*c;
+    return wynik;
 }
