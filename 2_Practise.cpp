@@ -82,7 +82,7 @@ int main(){
     całkowitych o podanym rozmiarze. Pamięć pędzie przydzielana tak długo
     jak to możliwe.
     */
-    zad2Z7();
+    //zad2Z7(); - generuje błędy :(
 
     cout<<"---\nZadanie 2.8 funkcje inline\n";
     // funkcje inline różnią się od standardowych miejscem ich zapisu podczas kompilacji
