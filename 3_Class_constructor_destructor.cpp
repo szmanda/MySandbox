@@ -30,6 +30,31 @@ void punkt::init(int xx, int yy){ //definicja poza klasą
     //nie jest wymagany
     x = xx; y = yy;
 }
+class Drum{
+    char type;
+    int volume;
+
+    static float pi; // deklaracja stałej pi
+
+public:
+    Drum(char t, int vol){          // to jest konstruktor
+        cout<<"\n dzialanie konstruktora\n";
+        type = t;
+        if (vol>0)
+            volume = vol;
+        else
+            volume = 1;
+    }
+    ~Drum(){                          // to jest destruktor
+        cout<<" dzialanie destruktora\n";
+        delete &type;
+        delete &volume;
+        // nie usuwam pi, nie miałoby to sensu - nie jest związanie z tym obiektem ale klasą samą w sobie
+    }
+};
+
+float Drum::pi = 3.14; // inicjalizacja stałej pi (klasa Drum) (poza klasą, dlatego z operatorem zakresu)
+
 
 int main(){
 
@@ -69,6 +94,9 @@ int main(){
     b.przesun(-3,9);
     b.wyswietl();
 
+    delete a;
+    delete b;
+
     /*
     3. Przypisywanie obiektów:
     Możliwe jest także przypisywanie obiektów pewnego typu innym
@@ -82,7 +110,41 @@ int main(){
 
 
     4. Konstruktor i destruktor:
-    ...
+    Funkcja składowa o nazwie klasy jest jej konstruktorem. Nie zwraca ona
+    żadnej wartości i nie może być poprzedzona typem danych, ani słowem
+    kluczowym void. Konstruktor jes wywoływany zaraz po przydzieleniu pamięci
+    dla obiektu. Gdy wymaga on podania atrybutów nie można już więcej
+    deklarować obiektu bez podania tych danych.
+
+    Funkcja o tej samej nazwie, ale poprzedzona znakiem '~' jest zwana
+    destruktorem. Jest ona wywoływana zaraz przed zwolnieniem pamięci przez
+    obiekt. Podobnie jak konstruktor nie zwraca on żadnej wartości.
+    (zob. class Drum)
+    */
+
+    Drum * b1 = new Drum('T',3);
+    cout<<"\t obiekt istnieje\n";
+    delete b1;
+
+
+    /*
+    5. statyczne dane składowe:
+    Dane zadeklarowane za pomocą słowa kluczowego "static" są dzielone przez
+    wszystkie obiekty danej klasy. Istnieją nawet wówczas gdy nie powstał żaden
+    obiekt danej klasy.
+    Domniemuje się inicjalizację wartością zerową, jednak możliwa jest
+    inicjalizacja jawna na zewnątrz klasy przy użyciu operatora zakresu (::).
+    [Nawet jeśli stała jest prywatna]. Deklaracja nie może znajdować się wewnątrz klasy!!!
+    (zob: static float pi; oraz: Drum::pi = 3.14;)
+
+
+    6. Wykorzystanie klas
+    W praktyce użytkownik klasy (klient) otrzyma:
+        - plik nagłówkowy [*.h] z dekalracją klasy, który będzi włączany do kazdego programu
+        korzystającego z danej klasy;
+        - skompilowany moduł z definicją klasy
+    Oznacza to że nie będzie on w stanie zobaczyć kodu klasy, ale będzie miał wszystkie
+    niezbędne informacje potrzebne do korzystania z niej.
     */
 
     return 0;
