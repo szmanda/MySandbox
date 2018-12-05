@@ -1,9 +1,13 @@
-﻿class Punkt{
+class Punkt{
     float x;
     float y;
 
 public:
     Punkt(float, float);
-    Przesun(float, float);
-    Wyswietl();
+    void Przesun(float, float);
+    //void Wyswietl(); // zad3.1
+    float Odcieta();
+    float Rzedna();
+    void Skaluj(float);
+    void Obracaj(float);
 };
